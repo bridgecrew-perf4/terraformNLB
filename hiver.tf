@@ -54,7 +54,7 @@ resource "aws_security_group" "allow_tls" {
 resource "aws_instance" "prod-web-server" {
   ami = "ami-00831fc7c1e3ddc60"
   count = 2
-  instance_type = "t2.micro"
+  instance_type = "r5.large"
   security_groups = ["${aws_security_group.allow_tls.id}"]
   subnet_id = "${aws_subnet.private_subnet.id}"
   tags = {
