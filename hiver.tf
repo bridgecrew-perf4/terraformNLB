@@ -1,4 +1,7 @@
 
+# Subnet Creation
+
+
 resource "aws_subnet" "private_subnet" {
   vpc_id                  = "vpc-dde928bb"
   cidr_block              = "172.31.32.0/20"
@@ -9,7 +12,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 
-
+# Security Group Creation
 
 
 
@@ -49,7 +52,7 @@ resource "aws_security_group" "allow_tls" {
 
 
 
-
+# Two r5.large EC2 creation with name prod-web-server1 and 2 respectively
 
 resource "aws_instance" "prod-web-server" {
   ami = "ami-00831fc7c1e3ddc60"
@@ -63,7 +66,7 @@ resource "aws_instance" "prod-web-server" {
 }
 
 
-
+# Target Group Creation
 
 
 resource "aws_lb_target_group" "test" {
@@ -75,7 +78,7 @@ resource "aws_lb_target_group" "test" {
 
 
 
-
+# Network Load Balancer Creation
 
 
 
@@ -91,7 +94,7 @@ resource "aws_lb" "test" {
 }
 
 
-
+# Listeners Creation
 
 
 resource "aws_lb_listener" "main" {
@@ -106,14 +109,13 @@ resource "aws_lb_listener" "main" {
 }
 
 
-
+# Attaching both the EC2s to the target group
 
 
 
 resource "aws_lb_target_group_attachment" "test" {
   count = 2
-  target_group_arn = "${aws_lb_target_group.test.arn}"
-#  target_id        = "${element(aws_instance.prod-web-server.id, count.index)}" 
+  target_group_arn = "${aws_lb_target_group.test.arn}" 
    target_id = "${aws_instance.prod-web-server[count.index].id}"
   port             = 80
 }
