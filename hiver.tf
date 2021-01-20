@@ -1,5 +1,5 @@
 
-# Subnet Creation
+# Subnet Creation.
 
 
 resource "aws_subnet" "private_subnet" {
@@ -12,7 +12,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 
-# Security Group Creation
+# Security Group Creation.
 
 
 
@@ -52,7 +52,7 @@ resource "aws_security_group" "allow_tls" {
 
 
 
-# Two r5.large EC2 creation with name prod-web-server1 and 2 respectively
+# Two r5.large EC2 creation with name prod-web-server1 and 2 respectively.
 
 resource "aws_instance" "prod-web-server" {
   ami = "ami-00831fc7c1e3ddc60"
@@ -66,7 +66,7 @@ resource "aws_instance" "prod-web-server" {
 }
 
 
-# Target Group Creation
+# Target Group Creation.
 
 
 resource "aws_lb_target_group" "test" {
@@ -94,7 +94,7 @@ resource "aws_lb" "test" {
 }
 
 
-# Listeners Creation
+# Listeners Creation.
 
 
 resource "aws_lb_listener" "main" {
@@ -109,7 +109,7 @@ resource "aws_lb_listener" "main" {
 }
 
 
-# Attaching both the EC2s to the target group
+# Attaching both the EC2s to the target group.
 
 
 
